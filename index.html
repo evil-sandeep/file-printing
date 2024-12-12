@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Selection for Printing</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+    <script src="script.js" defer></script> 
+   
+</head>
+<body>
+    <div class="container">
+        <h1>What do you want to print today? :</h1>
+        <div class="options-container">
+            <div class="option-card" id="file1" onclick="selectFileType('file1', 0.8)">
+                <img src="C:\Users\sahoo\Downloads\OIP (1).jpeg" alt="File 1 Image">
+                <div class="option-title">File 1</div>
+                <div class="option-description">(File Paper) Cost: ₹0.8 per page</div>
+            </div>
+            <div class="option-card" id="file2" onclick="selectFileType('file2', 0.6)">
+                <img src="C:\Users\sahoo\Downloads\OIP (1).jpeg" alt="File 2 Image">
+                <div class="option-title">File 2</div>
+                <div class="option-description">(Plain Paper) Cost: ₹0.6 per page</div>
+            </div>
+            <div class="option-card" id="file3" onclick="selectFileType('file3', 0.8)">
+                <img src="C:\Users\sahoo\Downloads\pixlr-image-generator-672654e9042c91a9e3926ce3.png" alt="File 3 Image">
+                <div class="option-title">File 3</div>
+                <div class="option-description">(Custom Upload) Cost: ₹0.8 per page</div>
+            </div>
+        </div>
+        <div id="pageCountContainer">
+            <label for="pageCount">Enter number of pages to print:</label>
+            <input type="number" id="pageCount" min="1" oninput="calculateCost()" />
+        </div>
+        <div id="costContainer">Estimated Cost: <span id="costDisplay">0</span> INR</div>
+        <div id="error" style="color: red;"></div>
+        <form id="uploadForm" style="display:none;" onsubmit="return false;">
+            <label for="fileInput">Choose File (PDF):</label>
+            <input type="file" id="fileInput" name="file" accept="application/pdf" onchange="handleFileUpload()" />
+        </form>
+        <button id="payButton" onclick="startPayment()" style="display:none;">Pay and Scan QR</button>
+        <video id="preview"></video>
+    </div>
+<script></script>
+   
+</body>
+</html>
