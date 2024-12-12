@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Selection for Printing</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-    <script src="script.js" defer></script> 
-   
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>What do you want to print today? :</h1>
+        <h1>What do you want to print today? :)</h1>
         <div class="options-container">
             <div class="option-card" id="file1" onclick="selectFileType('file1', 0.8)">
                 <img src="C:\Users\sahoo\Downloads\OIP (1).jpeg" alt="File 1 Image">
@@ -41,9 +38,13 @@
             <input type="file" id="fileInput" name="file" accept="application/pdf" onchange="handleFileUpload()" />
         </form>
         <button id="payButton" onclick="startPayment()" style="display:none;">Pay and Scan QR</button>
-        <video id="preview"></video>
+        <video id="preview" width="100%" height="auto" style="border: none; display: block;"></video>
+
+
     </div>
-<script></script>
+
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
    
 </body>
 </html>

@@ -1,15 +1,13 @@
-
-
 let selectedFileType = '';
 let costPerPage = 0;
 let serveoUrl = ''; // Store the Serveo URL here
 
+// Function to select the file type and set the appropriate cost
 function selectFileType(fileType, cost) {
     document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
     selectedFileType = fileType;
     costPerPage = cost;
     document.getElementById(fileType).classList.add('selected');
-
     if (fileType === 'file3') {
         document.getElementById('uploadForm').style.display = 'block';
         document.getElementById('pageCountContainer').style.display = 'none';
@@ -20,11 +18,11 @@ function selectFileType(fileType, cost) {
         document.getElementById('pageCountContainer').style.display = 'block';
         document.getElementById('pageCount').value = '';
     }
-
     document.getElementById('costContainer').style.display = 'block';
     document.getElementById('payButton').style.display = 'block';
 }
 
+// Function to calculate the cost based on the page count
 function calculateCost() {
     const pageCount = parseInt(document.getElementById('pageCount').value) || 0;
     if (pageCount > 0) {
@@ -36,13 +34,12 @@ function calculateCost() {
     }
 }
 
+// Function to handle file upload and read the PDF
 function handleFileUpload() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
-
     if (file && file.type === 'application/pdf') {
         const reader = new FileReader();
-
         reader.onload = function () {
             const typedArray = new Uint8Array(reader.result);
             pdfjsLib.getDocument(typedArray).promise.then(function (pdf) {
@@ -55,7 +52,6 @@ function handleFileUpload() {
                 document.getElementById('costDisplay').innerText = '0';
             });
         };
-
         reader.readAsArrayBuffer(file);
     } else {
         document.getElementById('error').textContent = 'Please upload a valid PDF file.';
@@ -63,14 +59,15 @@ function handleFileUpload() {
     }
 }
 
+// Function that starts the payment process and triggers QR scanning
 function startPayment() {
     alert('Starting payment process...'); // Placeholder for actual payment implementation
-    startQRScanner();
+    startQRScanner(); // Starts the QR Scanner
 }
 
+// Function to send the open request to the URL
 function sendOpenRequest(endpoint) {
     const endpointUrl = `${serveoUrl}${endpoint}`; // Append the selected endpoint
-
     fetch(endpointUrl)
         .then(response => response.json())
         .then(data => {
@@ -83,37 +80,50 @@ function sendOpenRequest(endpoint) {
         });
 }
 
+// Function to initialize and start the QR scanner
 function startQRScanner() {
-    const scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    const previewElement = document.getElementById('preview');
+    
+    // Make sure the video element is visible when QR scanning starts
+    previewElement.style.display = 'block'; // Show the preview element
+    
+    const scanner = new Instascan.Scanner({ video: previewElement });
 
+    // Attempt to get available cameras
     Instascan.Camera.getCameras().then(cameras => {
         if (cameras.length > 0) {
-            scanner.start(cameras[0]);
+            // Start the scanner with the first available camera
+            scanner.start(cameras[0]).catch(err => {
+                console.error('Error starting the camera:', err);
+                alert("Error starting the camera.");
+            });
         } else {
             alert("No cameras found.");
         }
-    }).catch(err => console.error("Camera error: ", err));
+    }).catch(err => {
+        console.error('Error accessing cameras:', err);
+        alert("Error accessing cameras.");
+    });
 
-    scanner.addListener('scan', content => {
-        serveoUrl = content; // Assign scanned content to serveoUrl
+    // Listen for QR code scan
+    scanner.addListener('scan', function(content) {
+        serveoUrl = content;  // Store the result of the QR code scan
         alert(`QR Code scanned! Serveo URL: ${serveoUrl}`);
-
-        if (!selectedFileType) {
-            alert('No file selected.');
-            return;
+        let endpoint = '';
+        switch (selectedFileType) {
+            case 'file1':
+                endpoint = '/print_static_file_1';
+                break;
+            case 'file2':
+                endpoint = '/print_static_file_2';
+                break;
+            case 'file3':
+                endpoint = '/print_static_file_3';
+                break;
+            default:
+                alert('No file selected.');
+                return;
         }
-
-        const endpointMap = {
-            file1: '/print_static_file_1',
-            file2: '/print_static_file_2',
-            file3: '/print_static_file_3',
-        };
-
-        const endpoint = endpointMap[selectedFileType] || '';
-        if (endpoint) {
-            sendOpenRequest(endpoint);
-        } else {
-            alert('Invalid file type selected.');
-        }
+        sendOpenRequest(endpoint); // Send the selected endpoint to the Serveo URL
     });
 }

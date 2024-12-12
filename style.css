@@ -1,237 +1,90 @@
-/* My CSS_Style */
-body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-}
 
-.container {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
-    text-align: center;
-    width: 90%;
-    animation: fadeIn 1s ease-out;
-}
-
-h1 {
-    color: #333;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.options-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.option-card {
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    cursor: pointer;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    position: relative;
-}
-
-.option-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
-}
-
-.option-card.selected {
-    border: 3px solid #007bff;
-    background: #e6f7ff;
-}
-
-img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-#pageCountContainer,
-#costContainer,
-#error {
-    margin-top: 25px;
-    display: none;
-    text-align: center;
-}
-
-#error {
-    color: #ff4d4f;
-    font-size: 14px;
-}
-
-#pageCount {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 60%;
-    margin: 10px auto;
-}
-
-#costDisplay {
-    font-weight: bold;
-    font-size: 20px;
-    color: #28a745;
-}
-
-button {
-    padding: 15px 30px;
-    background: linear-gradient(135deg, #4caf50, #45a049);
-    color: white;
-    font-size: 18px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    display: inline-block;
-    margin-top: 30px;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #45a049, #3e8e41);
-    transform: scale(1.05);
-}
-
-video {
-    width: 300px;
-    height: 300px;
-    margin-top: 20px;
-    border-radius: 10px;
-    display: none;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Your CSS_Style */
-/* body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-.container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 1000px;
-    text-align: center;
-}
-h1 {
-    color: #333;
-    font-size: 24px;
-}
-.options-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    gap: 20px;
-}
-.option-card {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-    width: 30%;
-    cursor: pointer;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-    position: relative;
-}
-.option-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-}
-.option-card.selected {
-    border: 2px solid #007bff;
-    background-color: #e0f7ff;
-}
-img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-#pageCountContainer, #costContainer, #error {
-    margin-top: 20px;
-    display: none;
-}
-#pageCount {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-#costDisplay {
-    font-weight: bold;
-    color: #4caf50;
-}
-button {
-    padding: 12px 25px;
-    background-color: #4caf50;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin: 20px auto;
-}
-button:hover {
-    background-color: #45a049;
-}
-video {
-    width: 300px;
-    height: 300px;
-    margin-top: 15px;
-    display: none;
-} */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        .options-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .option-card {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            width: 30%;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .option-card.selected {
+            border: 2px solid #007bff;
+            background-color: #e0f7ff;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #pageCountContainer, #costContainer, #error {
+            margin-top: 20px;
+            display: none;
+        }
+        #pageCount {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #costDisplay {
+            font-weight: bold;
+            color: #4caf50;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        video {
+            width: 300px;
+            height: 300px;
+            margin-top: 15px;
+            display: none;
+        }
+   
