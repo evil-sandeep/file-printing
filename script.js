@@ -1,6 +1,8 @@
 let selectedFileType = '';
 let costPerPage = 0;
 let serveoUrl = ''; // Store the Serveo URL here
+let scanner = null; // To store the scanner instance
+let cameraActive = false; // To track camera status
 
 // Function to select the file type and set the appropriate cost
 function selectFileType(fileType, cost) {
@@ -8,6 +10,7 @@ function selectFileType(fileType, cost) {
     selectedFileType = fileType;
     costPerPage = cost;
     document.getElementById(fileType).classList.add('selected');
+    
     if (fileType === 'file3') {
         document.getElementById('uploadForm').style.display = 'block';
         document.getElementById('pageCountContainer').style.display = 'none';
@@ -20,6 +23,16 @@ function selectFileType(fileType, cost) {
     }
     document.getElementById('costContainer').style.display = 'block';
     document.getElementById('payButton').style.display = 'block';
+    
+    // Stop the camera if it's not needed
+    if (fileType === 'file3') {
+        stopCamera(); // Stop camera if file3 is selected
+    } else {
+        // Ensure camera is stopped when switching to file1 or file2, if necessary
+        if (cameraActive) {
+            stopCamera();
+        }
+    }
 }
 
 // Function to calculate the cost based on the page count
@@ -84,16 +97,24 @@ function sendOpenRequest(endpoint) {
 function startQRScanner() {
     const previewElement = document.getElementById('preview');
     
-    // Make sure the video element is visible when QR scanning starts
-    previewElement.style.display = 'block'; // Show the preview element
+    // Show the preview element when QR scanning starts
+    previewElement.style.display = 'block';
     
-    const scanner = new Instascan.Scanner({ video: previewElement });
+    // Check if the camera is already active
+    if (cameraActive) {
+        // If the camera is active, we don't start a new instance
+        return;
+    }
+    
+    scanner = new Instascan.Scanner({ video: previewElement });
 
     // Attempt to get available cameras
     Instascan.Camera.getCameras().then(cameras => {
         if (cameras.length > 0) {
             // Start the scanner with the first available camera
-            scanner.start(cameras[0]).catch(err => {
+            scanner.start(cameras[0]).then(() => {
+                cameraActive = true; // Camera is active
+            }).catch(err => {
                 console.error('Error starting the camera:', err);
                 alert("Error starting the camera.");
             });
@@ -126,4 +147,13 @@ function startQRScanner() {
         }
         sendOpenRequest(endpoint); // Send the selected endpoint to the Serveo URL
     });
+}
+
+// Function to stop the camera
+function stopCamera() {
+    if (scanner && cameraActive) {
+        scanner.stop(); // Stop the camera stream
+        cameraActive = false; // Camera is no longer active
+        document.getElementById('preview').style.display = 'none'; // Hide the preview
+    }
 }

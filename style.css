@@ -87,4 +87,17 @@
             margin-top: 15px;
             display: none;
         }
-   
+        #preview {
+            width: 24%;                
+            height: auto;             
+            border: none;  
+            display: none;             
+            border-radius: 10px;       
+            object-fit: cover;         
+            
+            position: absolute;        
+            top: -5%;                 
+            left: 37%;                 
+            transform: translate(-50%, -50%); 
+        }
+        
